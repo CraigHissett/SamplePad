@@ -1,13 +1,10 @@
 void Setup_Outputs()
 {
   SoftwareSerial Output1(22,23); // RX, TX
-DFRobotDFPlayerMini DFPlayer1;
   SoftwareSerial Output2(24,25); // RX, TX
-DFRobotDFPlayerMini DFPlayer2;
   SoftwareSerial Output3(26,27); // RX, TX
-DFRobotDFPlayerMini DFPlayer3;
   SoftwareSerial Output4(28,29); // RX, TX
-DFRobotDFPlayerMini DFPlayer4;
+
 
   Output1.begin(9600);
   Output2.begin(9600);
@@ -104,12 +101,26 @@ DFRobotDFPlayerMini DFPlayer4;
 
 
 
-void PlaySound (String PadName, int velocity) {
+void PlaySound (int PadNo, int velocity) {
   //Get BankNo from Global variable
   //String to play - BankNo & "_" & PadName & ".wav"
   //Velocity will be used to determine % of Main volume to hit it at.
   //If Main Volume is 100 and pad is hit at half strength (map pad velocity against 0-100) resulting volume of hit will be 50.
-  
-  //myDFPlayer.play(ServerValue);
-  
+
+  if(PadNo == Pad1 || PadNo == Pad1r)
+  {
+    DFPlayer1.play(BankNo);
+  }
+  if(PadNo == Pad2 || PadNo == Pad2r)
+  {
+    DFPlayer2.play(BankNo);
+  }
+  if(PadNo == Pad3 || PadNo == Pad3r)
+  {
+    DFPlayer3.play(BankNo);
+  }
+  if(PadNo == Pad4 || PadNo == Pad4r)
+  {
+    DFPlayer4.play(BankNo);
+  }
 }

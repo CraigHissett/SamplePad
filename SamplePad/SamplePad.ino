@@ -32,6 +32,11 @@ const byte modeMax = 2; // This is the number of submenus/settings you want
   // some other similar stuff:
 LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C address is 0x27, migh need to change that and/or other arguments
 
+DFRobotDFPlayerMini DFPlayer1;  
+DFRobotDFPlayerMini DFPlayer2;
+DFRobotDFPlayerMini DFPlayer3;
+DFRobotDFPlayerMini DFPlayer4;
+
 int BankNo = 1;
 int Volume = 100;
 
@@ -44,17 +49,20 @@ char mVol[]= "Volume:";
 volatile byte inputMode = 0;              // some flag connected to changing the user input values
 volatile boolean rotary_change = false;   // will turn true if rotary_counter has changed
 
-const byte Pad1m = A0;                  // Pad 1, main pad
+const byte Pad1 = A0;                  // Pad 1, main pad
 const byte Pad1r = A1;                  // Pad 1, rim shot
-const byte Pad2m = A2;
+const byte Pad2 = A2;
 const byte Pad2r = A3;
-const byte Pad3m = A4;
+const byte Pad3 = A4;
 const byte Pad3r = A5;
-const byte Pad4m = A6;
+const byte Pad4 = A6;
 const byte Pad4r = A7;
 
+const int ANALOG_PIN_COUNT = 8;
+int analogPins[ANALOG_PIN_COUNT] = { Pad1, Pad1r, Pad2, Pad2r, Pad3, Pad3r,Pad4, Pad4r };
+int padValues[ANALOG_PIN_COUNT];
+
 void setup() {
-  //Rotary encoder section of setup
   Serial.begin(9600);
   Setup_Config();
   Setup_Inputs();
